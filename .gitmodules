@@ -25,3 +25,6 @@
 [submodule "lab9"]
 	path = lab9
 	url = https://github.com/f1tenth/f1tenth_lab9_template
+[submodule "f1tenth_gym_ros"]
+	path = f1tenth_gym_ros
+	url = git@github.com:jwdinius/f1tenth_gym_ros.git
