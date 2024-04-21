@@ -4,21 +4,59 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Build Lab 1",
+            "type": "shell",
+            "command": "colcon build --packages-up-to lab1_pkg"
+        },
+        {
+            "label": "Run Lab 1",
+            "type": "shell",
+            "command": "source install/setup.bash && ros2 launch lab1_pkg lab1_pkg.launch.xml",
+            "dependsOn": ["Build Lab 1"],
+            "dependsOrder": "sequence",
+        },
+        {
+            "label": "Build Lab 2",
+            "type": "shell",
+            "command": "colcon build --packages-up-to safety_node"
+        },
+        {
+            "label": "Run Lab 2",
+            "type": "shell",
+            "command": "source install/setup.bash && ros2 launch lab1_pkg lab1_pkg.launch.xml",
+            "dependsOn": ["Build Lab 1"],
+            "dependsOrder": "sequence",
+        },
+        {
             "label": "Build f1tenth_gym_ros simulation",
             "type": "shell",
             "command": "colcon build --packages-up-to f1tenth_gym_ros"
         },
         {
-            "label": "Source the workspace",
+            "label": "Launch teleop",
             "type": "shell",
-            "command": "source install/setup.bash"
+            "command": "ros2 run teleop_twist_keyboard teleop_twist_keyboard",
+            "group": "test",
+            "problemMatcher": []
         },
         {
             "label": "Run f1tenth_gym_ros simulation",
             "type": "shell",
             "command": "source install/setup.bash && ros2 launch f1tenth_gym_ros gym_bridge_launch.py",
-            "dependsOn": ["Build f1tenth_gym_ros simulation", "Source the workspace"],
-            "dependsOrder": "sequence"
-        }
+            "dependsOn": ["Build f1tenth_gym_ros simulation"],
+            "dependsOrder": "sequence",
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run sim and teleop",
+            "dependsOn": [
+                "Run f1tenth_gym_ros simulation",
+                "Launch teleop"
+            ],
+            "dependsOrder": "parallel",
+            "group": "test",
+            "problemMatcher": []
+        },
     ]
 }
