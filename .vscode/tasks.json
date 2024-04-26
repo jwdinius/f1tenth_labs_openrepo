@@ -23,8 +23,8 @@
         {
             "label": "Run Lab 2",
             "type": "shell",
-            "command": "source install/setup.bash && ros2 launch lab1_pkg lab1_pkg.launch.xml",
-            "dependsOn": ["Build Lab 1"],
+            "command": "source install/setup.bash && ros2 launch safety_node safety_node.launch.xml",
+            "dependsOn": ["Build Lab 2"],
             "dependsOrder": "sequence",
         },
         {
